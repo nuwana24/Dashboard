@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: rgb(255, 102, 0);
+  position: relative;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -36,3 +39,15 @@
     transform: rotate(360deg);
   }
 }
+.popup-parent{
+  position: absolute;
+  background: #fff;
+  width: 400px;
+  border: solid 1px black;
+  left: 40%;
+  height: 50%;
+  padding: 20px;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+

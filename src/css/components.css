@@ -1,0 +1,134 @@
+body{
+    background-color: rgb(224, 223, 223);
+}
+.ash-color{
+    background-color:rgb(224, 223, 223) ;
+}
+
+main{
+    min-height: calc(100vh - 123px -64px);
+}
+#main2{
+    margin-top: 0%;
+}
+
+
+.Body{
+    background-color: rgb(223, 223, 223);
+    min-height: calc(100vh - 123px -64px);
+
+}
+.footer{
+    background-color: rgb(41, 41, 41);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.white-color{
+    background-color: rgb(255, 255, 255) !important;
+    padding: 20px;
+}
+.Table{
+    padding: 20px;
+}
+ /* h4{
+    color: rgb(255, 0, 0);
+    float:left;
+    padding: 20px 0;
+
+} */
+#row1{
+
+}
+#col2{
+    
+}
+
+#nav-bar{
+    height: 20vh;
+    background-color: rgb(255, 255, 255);
+
+}
+.profile-detail {
+    display: inline-block;
+}
+
+.profile-detail h5{
+    display: inline;
+    color: rgb(46, 46, 46);
+}
+.white{
+    background-color: rgb(255, 255, 255);
+}
+#Nav-font{
+    font-size: x-large;
+    font-weight: 600;
+    color: black;
+}
+#active {
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+.hello-content{
+    padding: 40px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 2%;
+    border-radius: 5px;
+    
+}
+.hello-content h2 {
+    background-color: rgb(255, 255, 255);    
+}
+.hello-content p {
+    background-color: rgb(255, 255, 255);    
+}
+#add-button{
+    float: right;
+}
+.data-card-row{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(206, 206, 206);
+    background-color: white;
+
+}
+.data-card-detail{
+    margin-left: 2.5%;
+}
+.data-card-detail p{
+    margin-bottom: 0;
+}
+#o-name{
+    font-weight: bold;
+}
+#o-type{
+    margin-top: -3%;
+}
+.viewall-btn{
+    border: none;
+    background-color: transparent;
+    margin-left: 1.5%;
+    color: #e50000;
+}
+.viewall-btn:hover{
+    text-decoration: underline;
+}
+.o-card{
+    min-height: 340px;
+    background-color: white;
+
+}
+.o-card p{
+    background-color: white;
+
+}
+.o-parent-card{
+    background-color: white;
+    border-radius: 10px;
+
+}
+.o-parent-card img{
+    background-color: white;
+
+}
