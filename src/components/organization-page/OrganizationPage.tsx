@@ -22,7 +22,7 @@ const OrganizationPage = (props: Props) => {
   const [organizationList, setOrganizationList] = useState<IList[]>([]);
 
   const [show, setShow] = useState(false);
-  const [selected, setSelected] = useState(Object);
+  const [selected, setSelected] = useState(null);
   const [updatedItem, setUpdatedItem] = useState(false);
   const [deletedItem, setDeletedItem] = useState(false);
 
@@ -80,7 +80,10 @@ const OrganizationPage = (props: Props) => {
         console.log(error);
       });
   };
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setSelected(null);
+    setShow(false);
+  }
 
   const handleEdit = (selected: any) => {
     setSelected(selected);
@@ -88,25 +91,6 @@ const OrganizationPage = (props: Props) => {
   };
 
   const handleSubmitModal = () => setShow(!show);
-
-  const modal = (
-    <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title> Modal heading </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <OrganizationForm
-            closeHandler={closeHandler}
-            organizationHandler={organizationHandler}
-            organizationupdateHandler={organizationupdateHandler}
-            formUpdate={true}
-            organizationList={selected}
-          />
-        </Modal.Body>
-      </Modal>
-    </>
-  );
 
   return (
     <>
@@ -160,6 +144,7 @@ const OrganizationPage = (props: Props) => {
         show={show}
         selected={selected}
         updateData={null}
+        formUpdate={!!selected}
         handleClose={handleClose}
         closeHandler={closeHandler}
         organizationupdateHandler={organizationupdateHandler}

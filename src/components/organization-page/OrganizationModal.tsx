@@ -6,6 +6,7 @@ type Props = {
   show: boolean;
   updateData: any;
   selected?: any;
+  formUpdate: boolean;
   handleClose: () => void;
   closeHandler: () => void;
   organizationHandler: (organization: any) => Promise<void>;
@@ -15,12 +16,14 @@ type Props = {
 const OrganizationModal: React.FC<Props> = ({
   show,
   updateData,
+  formUpdate,
   handleClose,
   closeHandler,
   organizationHandler,
   organizationupdateHandler,
   selected,
 }) => {
+  console.log(formUpdate);
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -31,7 +34,7 @@ const OrganizationModal: React.FC<Props> = ({
           closeHandler={closeHandler}
           organizationHandler={organizationHandler}
           organizationupdateHandler={organizationupdateHandler}
-          formUpdate={true}
+          formUpdate={formUpdate}
           updateData={updateData}
           organizationList={selected}
         />

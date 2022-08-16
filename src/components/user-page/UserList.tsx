@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "antd/dist/antd.css";
 import { Table,Input} from "antd";
@@ -15,7 +15,8 @@ type Props = {
 
 const UserList = (props: Props) => {
   const userList = props.userList;
-  const dataSource = userList;
+
+  const [users, setUsers] = useState(userList);
 
   const columns = [
     {
@@ -51,6 +52,15 @@ const UserList = (props: Props) => {
       },
     },
   ];
+
+  const onSearchChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
+  e.currentTarget.value
+    ? setUsers(
+      userList.filter(
+          (user: any) => user.firstName === e.currentTarget.value
+        )
+      )
+    : setUsers(userList);
 
   // const tableHead = (
 
@@ -90,6 +100,7 @@ const UserList = (props: Props) => {
                 prefix={<SearchOutlined />}
                 style={{ width: 250 }}
                 placeholder=" Search"
+                onChange={onSearchChangeHandler}
               />
             </Col>
             <Col id="add-button">
@@ -113,7 +124,7 @@ const UserList = (props: Props) => {
                     {tableBody}
                 </tbody>
             </Table> */}
-        <Table columns={columns} dataSource={dataSource}></Table>
+        <Table columns={columns} dataSource={users}></Table>
       </div>
     </Container>
   );
