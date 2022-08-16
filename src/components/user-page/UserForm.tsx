@@ -33,7 +33,7 @@ export default class UserForm extends Component<Props, State>{
         isOpen: true,
     }
     componentDidUpdate() {
-        console.log(this.state)
+        console.log(this.props.userList);
     }
     addUser = (e:any) =>{
         this.setState({
@@ -113,7 +113,7 @@ export default class UserForm extends Component<Props, State>{
                         </Row>
                         <Row>
                             <Col className='mt-3'>
-                                {this.props.userList ? (
+                                {this.props.userList !== null ? (
                                     <>
                                     <Button type="submit" onClick={this.update} variant="success" >Update</Button>
                                     <Button type="submit" onClick={this.props.closeHandler}variant="light" >Cancel</Button>

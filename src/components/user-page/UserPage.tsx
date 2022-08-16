@@ -24,7 +24,7 @@ const UserPage = (props: Props) => {
   const [userList, setUserList] = useState<IList[]>([]);
 
   const [show, setShow] = useState(false);
-  const [selected, setSelected] = useState(Object);
+  const [selected, setSelected] = useState(null);
   const [updatedItem, setUpdatedItem] = useState(false);
   const [deletedItem, setDeletedItem] = useState(false);
   const [users, setUsers] = useState<IList[]>([]);
@@ -64,7 +64,7 @@ const UserPage = (props: Props) => {
     let updateItem = user;
 
     await api
-      .put("/user/$(user.id)", updateItem)
+      .put(`/user/${user.id}`, updateItem)
       .then((res: any) => {
         setUpdatedItem(user.id);
       })
