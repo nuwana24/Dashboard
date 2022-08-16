@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "antd/dist/antd.css";
-import { Table,Input} from "antd";
-import { EditOutlined, DeleteOutlined,SearchOutlined } from "@ant-design/icons";
+import { Table, Input } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 
 type Props = {
   userList: any;
@@ -11,11 +15,12 @@ type Props = {
   closeHandler: () => void;
   handleEdit: (use: object) => void;
   deleteHandler: (use: object) => void;
+  onAddClick: () => void;
+  onSearch: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 const UserList = (props: Props) => {
   const userList = props.userList;
-  const dataSource = userList;
 
   const columns = [
     {
@@ -45,7 +50,10 @@ const UserList = (props: Props) => {
         return (
           <>
             <EditOutlined onClick={() => props.handleEdit(user)} />
-            <DeleteOutlined style={{ color: "red", marginLeft: 12 }} />
+            <DeleteOutlined
+              style={{ color: "red", marginLeft: 12 }}
+              onClick={() => props.deleteHandler(user)}
+            />
           </>
         );
       },
@@ -90,14 +98,12 @@ const UserList = (props: Props) => {
                 prefix={<SearchOutlined />}
                 style={{ width: 250 }}
                 placeholder=" Search"
+                onChange={props.onSearch}
               />
             </Col>
             <Col id="add-button">
-              <Button
-                id="add-button"
-                className="me-auto"
-                variant="danger"
-              >
+              <Button id="add-button" className="me-auto" variant="danger"
+              onClick={props.onAddClick} >
                 {" "}
                 + Add User{" "}
               </Button>
@@ -113,7 +119,7 @@ const UserList = (props: Props) => {
                     {tableBody}
                 </tbody>
             </Table> */}
-        <Table columns={columns} dataSource={dataSource}></Table>
+        <Table columns={columns} dataSource={userList}></Table>
       </div>
     </Container>
   );
