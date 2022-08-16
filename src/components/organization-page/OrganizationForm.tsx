@@ -38,6 +38,7 @@ export default class OrganizationForm extends Component<Props, State> {
     });
     e.preventDefault();
     this.props.organizationHandler(this.state);
+    this.props.closeHandler();
   };
   update = () => {
     this.props.organizationupdateHandler(this.state);

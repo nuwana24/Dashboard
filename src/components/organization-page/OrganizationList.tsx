@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "../../css/components.css";
 import "antd/dist/antd.css";
@@ -18,12 +18,11 @@ type Props = {
   handleEdit: (organization: object) => void;
   deleteHandler: (organization: object) => void;
   onAddClick: () => void;
+  onSearch: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 const OrganizationList = (props: Props) => {
   const organizationList = props.organizationList;
-
-  const [organizations, setOrganizations] = useState(organizationList);
 
   const columns = [
     {
@@ -62,15 +61,6 @@ const OrganizationList = (props: Props) => {
       },
     },
   ];
-
-  const onSearchChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
-    e.currentTarget.value
-      ? setOrganizations(
-          organizationList.filter(
-            (org: any) => org.orgName === e.currentTarget.value
-          )
-        )
-      : setOrganizations(organizationList);
 
   // const tableHead = (
 
@@ -111,7 +101,7 @@ const OrganizationList = (props: Props) => {
                 prefix={<SearchOutlined />}
                 style={{ width: 250 }}
                 placeholder=" Search"
-                onChange={onSearchChangeHandler}
+                onChange={props.onSearch}
               />
             </Col>
             <Col id="add-button">
@@ -136,7 +126,7 @@ const OrganizationList = (props: Props) => {
                         {tableBody}
                     </tbody>
                 </Table> */}
-        <Table columns={columns} dataSource={organizations}></Table>
+        <Table columns={columns} dataSource={organizationList}></Table>
       </div>
     </Container>
   );

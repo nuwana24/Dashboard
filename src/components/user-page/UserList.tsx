@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "antd/dist/antd.css";
-import { Table,Input} from "antd";
-import { EditOutlined, DeleteOutlined,SearchOutlined } from "@ant-design/icons";
+import { Table, Input } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 
 type Props = {
   userList: any;
@@ -11,12 +15,11 @@ type Props = {
   closeHandler: () => void;
   handleEdit: (use: object) => void;
   deleteHandler: (use: object) => void;
+  onSearch: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 const UserList = (props: Props) => {
   const userList = props.userList;
-
-  const [users, setUsers] = useState(userList);
 
   const columns = [
     {
@@ -46,21 +49,15 @@ const UserList = (props: Props) => {
         return (
           <>
             <EditOutlined onClick={() => props.handleEdit(user)} />
-            <DeleteOutlined style={{ color: "red", marginLeft: 12 }} />
+            <DeleteOutlined
+              style={{ color: "red", marginLeft: 12 }}
+              onClick={() => props.deleteHandler(user)}
+            />
           </>
         );
       },
     },
   ];
-
-  const onSearchChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
-  e.currentTarget.value
-    ? setUsers(
-      userList.filter(
-          (user: any) => user.firstName === e.currentTarget.value
-        )
-      )
-    : setUsers(userList);
 
   // const tableHead = (
 
@@ -100,15 +97,11 @@ const UserList = (props: Props) => {
                 prefix={<SearchOutlined />}
                 style={{ width: 250 }}
                 placeholder=" Search"
-                onChange={onSearchChangeHandler}
+                onChange={props.onSearch}
               />
             </Col>
             <Col id="add-button">
-              <Button
-                id="add-button"
-                className="me-auto"
-                variant="danger"
-              >
+              <Button id="add-button" className="me-auto" variant="danger">
                 {" "}
                 + Add User{" "}
               </Button>
@@ -124,7 +117,7 @@ const UserList = (props: Props) => {
                     {tableBody}
                 </tbody>
             </Table> */}
-        <Table columns={columns} dataSource={users}></Table>
+        <Table columns={columns} dataSource={userList}></Table>
       </div>
     </Container>
   );

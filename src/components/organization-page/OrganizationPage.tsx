@@ -7,6 +7,7 @@ import "../../css/components.css";
 import OrganizationModal from "./OrganizationModal";
 import UserPicture from "../../img/user.jpg";
 import "../../css/navbar.css"
+import { AnyCnameRecord } from "dns";
 
 type Props = {};
 
@@ -25,6 +26,7 @@ const OrganizationPage = (props: Props) => {
   const [selected, setSelected] = useState(null);
   const [updatedItem, setUpdatedItem] = useState(false);
   const [deletedItem, setDeletedItem] = useState(false);
+  const [organizations, setOrganizations] = useState<IList[]>([]);
 
   const getOrganizations = async () => {
     const response = await api.get("/organization");
@@ -36,6 +38,7 @@ const OrganizationPage = (props: Props) => {
     getOrganizations()
       .then((res: any) => {
         setOrganizationList(res);
+        setOrganizations(res);
       })
       .catch((error: any) => {});
   }, [updatedItem, deletedItem]);
@@ -48,7 +51,9 @@ const OrganizationPage = (props: Props) => {
     const response = await api
       .post("/organization", request)
       .then((res: any) => {
+        console.log(res);
         setOrganizationList([...organizationList, res.data]);
+        setOrganizations([...organizationList, res.data]);
       })
       .catch((error: any) => {
         console.log(error);
@@ -92,6 +97,15 @@ const OrganizationPage = (props: Props) => {
 
   const handleSubmitModal = () => setShow(!show);
 
+  const onSearchChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
+  e.currentTarget.value
+    ? setOrganizations(
+        organizationList.filter(
+          (org: any) => org.orgName === e.currentTarget.value
+        )
+      )
+    : setOrganizations(organizationList);
+
   return (
     <>
     <nav className='nav__brand'>
@@ -128,13 +142,14 @@ const OrganizationPage = (props: Props) => {
       />
       {organizationList.length > 0 ? (
         <OrganizationList
-          organizationList={organizationList}
+          organizationList={organizations}
           deleteHandler={deleteHandler}
           handleEdit={handleEdit}
           organizationHandler={organizationHandler}
           closeHandler={closeHandler}
           organizationupdateHandler={organizationupdateHandler}
           onAddClick={handleSubmitModal}
+          onSearch={onSearchChangeHandler}
         />
       ) : (
         ""
