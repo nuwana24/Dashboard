@@ -134,12 +134,13 @@ const OrganizationPage = (props: Props) => {
             </div>
         </nav>
     <div className="Body">
-      <OrganizationForm
+      {/* <OrganizationForm
         organizationHandler={organizationHandler}
         closeHandler={closeHandler}
         organizationupdateHandler={organizationupdateHandler}
         organizationList=""
-      />
+      /> */}
+      <br/>
       {organizationList.length > 0 ? (
         <OrganizationList
           organizationList={organizations}

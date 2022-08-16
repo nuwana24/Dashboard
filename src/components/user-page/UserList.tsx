@@ -15,6 +15,7 @@ type Props = {
   closeHandler: () => void;
   handleEdit: (use: object) => void;
   deleteHandler: (use: object) => void;
+  onAddClick: () => void;
   onSearch: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
@@ -101,7 +102,8 @@ const UserList = (props: Props) => {
               />
             </Col>
             <Col id="add-button">
-              <Button id="add-button" className="me-auto" variant="danger">
+              <Button id="add-button" className="me-auto" variant="danger"
+              onClick={props.onAddClick} >
                 {" "}
                 + Add User{" "}
               </Button>

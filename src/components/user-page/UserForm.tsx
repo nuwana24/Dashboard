@@ -3,16 +3,14 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import "../../css/components.css"
 
-
 interface Props {
     userHandler : (user : object) => void;
     userList : any;
     userupdateHandler : (user : object) => void;
     formUpdate?: boolean;
+    updateData?: any;
     closeHandler : () => void;
     
-    
-
 }
 interface State {
     id:string;
@@ -26,12 +24,13 @@ interface State {
 
 export default class UserForm extends Component<Props, State>{
     state = {
-        id:this.props.userList.id || uuidv4(),
-        email: this.props.userList.email || "",
-        firstName: this.props.userList.firstName || "",
-        lastName: this.props.userList.lastName || "",
-        organization: this.props.userList.organization || "",
-        role: this.props.userList.role || "",
+        id:this.props.userList?.id || uuidv4(),
+        email: this.props.userList?.email || "",
+        firstName: this.props.userList?.firstName || "",
+        lastName: this.props.userList?.lastName || "",
+        organization: this.props.userList?.organization || "",
+        role: this.props.userList?.role || "",
+        isOpen: true,
     }
     componentDidUpdate() {
         console.log(this.state)
@@ -42,17 +41,29 @@ export default class UserForm extends Component<Props, State>{
         })
         e.preventDefault();
         this.props.userHandler(this.state);
+        this.props.closeHandler();
+
     }
     update = () =>{
         this.props.userupdateHandler(this.state);
         this.props.closeHandler();
     }
+    onSubmitHandler(e: React.SyntheticEvent) {
+        e.preventDefault();
+    
+        if (this.props.formUpdate) {
+            this.update();
+            return;
+        }
+    
+        this.addUser(e);
+      }
 
     render() {
         return (
             <div id='Body'>
                 <Container>
-                    <form onSubmit={this.addUser}>
+                    <form onSubmit={this.props.formUpdate ? this.update: this.addUser}>
                         <Row>
                             <Col>
                                 <div>
@@ -102,7 +113,7 @@ export default class UserForm extends Component<Props, State>{
                         </Row>
                         <Row>
                             <Col className='mt-3'>
-                                {this.props.formUpdate ? (
+                                {this.props.userList ? (
                                     <>
                                     <Button type="submit" onClick={this.update} variant="success" >Update</Button>
                                     <Button type="submit" onClick={this.props.closeHandler}variant="light" >Cancel</Button>

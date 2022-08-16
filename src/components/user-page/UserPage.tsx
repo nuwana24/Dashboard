@@ -4,6 +4,7 @@ import UserForm from "./UserForm";
 import UserList from "./UserList";
 import api from "../../api/index";
 import "../../css/components.css";
+import UserModal from "./UserModal";
 import UserPicture from "../../img/user.jpg";
 import "../../css/navbar.css";
 import Footer from "../footer";
@@ -76,7 +77,7 @@ const UserPage = (props: Props) => {
   };
   const deleteHandler = async (selected: any) => {
     await api
-      .delete("/user/$(selected.id)")
+      .delete(`/user/${selected.id}`)
       .then((res: any) => {
         setDeletedItem(selected.id);
       })
@@ -84,12 +85,16 @@ const UserPage = (props: Props) => {
         console.log(error);
       });
   };
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setSelected(null);
+    setShow(false);
+  }
 
   const handleEdit = (selected: any) => {
     setSelected(selected);
     setShow(true);
   };
+  const handleSubmitModal = () => setShow(!show);
 
   const onSearchChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
     e.currentTarget.value
@@ -100,24 +105,24 @@ const UserPage = (props: Props) => {
         )
       : setUsers(userList);
 
-  const modal = (
-    <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title> Modal heading </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <UserForm
-            closeHandler={closeHandler}
-            userHandler={userHandler}
-            userupdateHandler={userupdateHandler}
-            formUpdate={true}
-            userList={selected}
-          />
-        </Modal.Body>
-      </Modal>
-    </>
-  );
+  // const modal = (
+  //   <>
+  //     <Modal show={show} onHide={handleClose}>
+  //       <Modal.Header closeButton>
+  //         <Modal.Title> Modal heading </Modal.Title>
+  //       </Modal.Header>
+  //       <Modal.Body>
+  //         <UserForm
+  //           closeHandler={closeHandler}
+  //           userHandler={userHandler}
+  //           userupdateHandler={userupdateHandler}
+  //           formUpdate={true}
+  //           userList={selected}
+  //         />
+  //       </Modal.Body>
+  //     </Modal>
+  //   </>
+  // );
   return (
     <>
       <nav className="nav__brand">
@@ -170,12 +175,23 @@ const UserPage = (props: Props) => {
             userHandler={userHandler}
             closeHandler={closeHandler}
             userupdateHandler={userupdateHandler}
+            onAddClick={handleSubmitModal}
             onSearch={onSearchChangeHandler}
           />
         ) : (
           ""
         )}
-        {modal}
+        {/* {modal} */}
+        <UserModal
+        show={show}
+        selected={selected}
+        updateData={null}
+        formUpdate={!!selected}
+        handleClose={handleClose}
+        closeHandler={closeHandler}
+        userupdateHandler={userupdateHandler}
+        userHandler={userHandler}
+      />
       </div>
       {/* <Footer/> */}
     </>
