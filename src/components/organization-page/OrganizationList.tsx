@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "../../css/components.css";
 import "antd/dist/antd.css";
 import { Table, Input } from "antd";
 import EditIcon from "@mui/icons-material/Edit";
-import { EditOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 
 type Props = {
   organizationList: any;
@@ -14,11 +18,11 @@ type Props = {
   handleEdit: (organization: object) => void;
   deleteHandler: (organization: object) => void;
   onAddClick: () => void;
+  onSearch: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 const OrganizationList = (props: Props) => {
   const organizationList = props.organizationList;
-  const dataSource = organizationList;
 
   const columns = [
     {
@@ -94,8 +98,12 @@ const OrganizationList = (props: Props) => {
         <div className="search-bar-row mb-4">
           <Row>
             <Col>
-              <Input prefix={<SearchOutlined />} style={{ width: 250 }}placeholder= " Search" />
-
+              <Input
+                prefix={<SearchOutlined />}
+                style={{ width: 250 }}
+                placeholder=" Search"
+                onChange={props.onSearch}
+              />
             </Col>
             <Col id="add-button">
               <Button
@@ -119,7 +127,7 @@ const OrganizationList = (props: Props) => {
                         {tableBody}
                     </tbody>
                 </Table> */}
-        <Table columns={columns} dataSource={dataSource}></Table>
+        <Table columns={columns} dataSource={organizationList}></Table>
       </div>
     </Container>
     <br/>

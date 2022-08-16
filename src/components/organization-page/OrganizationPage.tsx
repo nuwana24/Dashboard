@@ -7,6 +7,7 @@ import "../../css/components.css";
 import OrganizationModal from "./OrganizationModal";
 import UserPicture from "../../img/user.jpg";
 import "../../css/navbar.css"
+import { AnyCnameRecord } from "dns";
 
 type Props = {};
 
@@ -22,9 +23,10 @@ const OrganizationPage = (props: Props) => {
   const [organizationList, setOrganizationList] = useState<IList[]>([]);
 
   const [show, setShow] = useState(false);
-  const [selected, setSelected] = useState(Object);
+  const [selected, setSelected] = useState(null);
   const [updatedItem, setUpdatedItem] = useState(false);
   const [deletedItem, setDeletedItem] = useState(false);
+  const [organizations, setOrganizations] = useState<IList[]>([]);
 
   const getOrganizations = async () => {
     const response = await api.get("/organization");
@@ -36,6 +38,7 @@ const OrganizationPage = (props: Props) => {
     getOrganizations()
       .then((res: any) => {
         setOrganizationList(res);
+        setOrganizations(res);
       })
       .catch((error: any) => {});
   }, [updatedItem, deletedItem]);
@@ -48,7 +51,9 @@ const OrganizationPage = (props: Props) => {
     const response = await api
       .post("/organization", request)
       .then((res: any) => {
+        console.log(res);
         setOrganizationList([...organizationList, res.data]);
+        setOrganizations([...organizationList, res.data]);
       })
       .catch((error: any) => {
         console.log(error);
@@ -80,7 +85,10 @@ const OrganizationPage = (props: Props) => {
         console.log(error);
       });
   };
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setSelected(null);
+    setShow(false);
+  }
 
   const handleEdit = (selected: any) => {
     setSelected(selected);
@@ -89,24 +97,14 @@ const OrganizationPage = (props: Props) => {
 
   const handleSubmitModal = () => setShow(!show);
 
-  const modal = (
-    <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title> Modal heading </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <OrganizationForm
-            closeHandler={closeHandler}
-            organizationHandler={organizationHandler}
-            organizationupdateHandler={organizationupdateHandler}
-            formUpdate={true}
-            organizationList={selected}
-          />
-        </Modal.Body>
-      </Modal>
-    </>
-  );
+  const onSearchChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
+  e.currentTarget.value
+    ? setOrganizations(
+        organizationList.filter(
+          (org: any) => org.orgName === e.currentTarget.value
+        )
+      )
+    : setOrganizations(organizationList);
 
   return (
     <>
@@ -136,21 +134,23 @@ const OrganizationPage = (props: Props) => {
             </div>
         </nav>
     <div className="Body">
-      <OrganizationForm
+      {/* <OrganizationForm
         organizationHandler={organizationHandler}
         closeHandler={closeHandler}
         organizationupdateHandler={organizationupdateHandler}
         organizationList=""
-      />
+      /> */}
+      <br/>
       {organizationList.length > 0 ? (
         <OrganizationList
-          organizationList={organizationList}
+          organizationList={organizations}
           deleteHandler={deleteHandler}
           handleEdit={handleEdit}
           organizationHandler={organizationHandler}
           closeHandler={closeHandler}
           organizationupdateHandler={organizationupdateHandler}
           onAddClick={handleSubmitModal}
+          onSearch={onSearchChangeHandler}
         />
       ) : (
         ""
@@ -160,6 +160,7 @@ const OrganizationPage = (props: Props) => {
         show={show}
         selected={selected}
         updateData={null}
+        formUpdate={!!selected}
         handleClose={handleClose}
         closeHandler={closeHandler}
         organizationupdateHandler={organizationupdateHandler}

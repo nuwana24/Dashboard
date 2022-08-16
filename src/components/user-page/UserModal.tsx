@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import OrganizationForm from "./OrganizationForm";
+import UserForm from "./UserForm";
 
 type Props = {
   show: boolean;
@@ -9,38 +9,37 @@ type Props = {
   formUpdate: boolean;
   handleClose: () => void;
   closeHandler: () => void;
-  organizationHandler: (organization: any) => Promise<void>;
-  organizationupdateHandler: (organization: any) => Promise<void>;
+  userHandler: (user: any) => Promise<void>;
+  userupdateHandler: (user: any) => Promise<void>;
 };
 
-const OrganizationModal: React.FC<Props> = ({
+const UserModal: React.FC<Props> = ({
   show,
   updateData,
   formUpdate,
   handleClose,
   closeHandler,
-  organizationHandler,
-  organizationupdateHandler,
+  userHandler,
+  userupdateHandler,
   selected,
 }) => {
-  console.log(formUpdate);
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title> Modal heading </Modal.Title>
+        <Modal.Title> </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <OrganizationForm
+        <UserForm
           closeHandler={closeHandler}
-          organizationHandler={organizationHandler}
-          organizationupdateHandler={organizationupdateHandler}
+          userHandler={userHandler}
+          userupdateHandler={userupdateHandler}
           formUpdate={formUpdate}
           updateData={updateData}
-          organizationList={selected}
+          userList={selected}
         />
       </Modal.Body>
     </Modal>
   );
 };
 
-export default OrganizationModal;
+export default UserModal;
