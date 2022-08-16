@@ -91,6 +91,15 @@ main{
     padding: 10px;
     border-bottom: 1px solid rgb(206, 206, 206);
     background-color: white;
+    min-height: 70px;
+
+}
+#org-img{
+    border-radius: 5px;
+
+}
+#user-img{
+    border-radius: 50px;
 
 }
 .data-card-detail{
@@ -104,12 +113,15 @@ main{
 }
 #o-type{
     margin-top: -3%;
+    color: rgb(105, 105, 105);
 }
+
 .viewall-btn{
     border: none;
     background-color: transparent;
     margin-left: 1.5%;
     color: #e50000;
+    padding: 10px ;
 }
 .viewall-btn:hover{
     text-decoration: underline;

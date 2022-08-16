@@ -37,6 +37,7 @@ li{
 .right-links h5{
     cursor:default;
     background-color: white;
+    color: rgb(110, 110, 110);
 }
 .right-links a{
     text-decoration: none;

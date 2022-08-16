@@ -68,9 +68,10 @@ export default class OrganizationForm extends Component<Props, State>{
                                     <label>Parent Organization Name</label></div>
                                     <Form.Select aria-label="Default select example" value={this.state.parentOrgName} onChange={(e) => this.setState({ parentOrgName: e.target.value })}>
                                         <option>Select</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="Vodafone">Vodafone</option>
+                                        <option value="Apple Inc">Apple Inc</option>
+                                        <option value="Google">Google</option>
+                                        <option value="Samsung PLC">Samsung PLC</option>
                                     </Form.Select>
                             </Col>
                         </Row>
@@ -80,9 +81,10 @@ export default class OrganizationForm extends Component<Props, State>{
                                     <label>Type</label></div>
                                     <Form.Select aria-label="Default select example" value={this.state.type} onChange={(e) => this.setState({ type: e.target.value })}>
                                         <option>Select</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="Company">Company</option>
+                                        <option value="Branch">Branch</option>
+                                        <option value="Department">Department</option>
+                                        <option value="BYOx Fed">BYOx Fed</option>
                                     </Form.Select>
                             </Col>
                         </Row>

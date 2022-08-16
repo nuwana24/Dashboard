@@ -23,6 +23,7 @@ const Layout = (props: Props) => {
                 <Route path="/" element={<OtherPage/>}>
                 </Route>
             </Routes>
+            <Footer/>
         </>
     )
 }

@@ -43,7 +43,7 @@ const OrganizationList = (props: Props) => {
     },
     {
       key: "actions",
-      title: "Actions",
+      title: "",
       render: (organization: any) => {
         return (
           <>
@@ -88,6 +88,7 @@ const OrganizationList = (props: Props) => {
   // );
 
   return (
+    <>
     <Container className="mt-3">
       <div className="white-color">
         <div className="search-bar-row mb-4">
@@ -121,6 +122,8 @@ const OrganizationList = (props: Props) => {
         <Table columns={columns} dataSource={dataSource}></Table>
       </div>
     </Container>
+    <br/>
+    </>
   );
 };
 export default OrganizationList;

@@ -81,6 +81,7 @@ const UserList = (props: Props) => {
   // );
 
   return (
+    <>
     <Container className="mt-3">
       <div className="white-color">
         <div className="search-bar-row mb-4">
@@ -116,6 +117,8 @@ const UserList = (props: Props) => {
         <Table columns={columns} dataSource={dataSource}></Table>
       </div>
     </Container>
+    <br/>
+    </>
   );
 };
 export default UserList;

@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import {} from "./userData";
 import UserPicture from "../img/user.jpg";
+import OrgPicture from "../img/high.png";
 import "../css/navbar.css";
 import Arrow from "../img/arrow.png";
 import "../css/components.css";
@@ -119,7 +120,7 @@ const OtherPage = (props: Props) => {
                     {organizationItem.length > 0 &&
                       organizationItem.slice(-5).map((item: any) => (
                         <div key={item.orgName} className="data-card-row">
-                          <img src={UserPicture} alt="" height={"40px"} />
+                          <img src={OrgPicture} id="org-img" alt="" height={"40px"} />
                           <div className="data-card-detail">
                             <p id="o-name">{item.orgName}</p>
                             <p id="o-type">{item.type}</p>
@@ -144,7 +145,7 @@ const OtherPage = (props: Props) => {
                     {userItem.length > 0 &&
                       userItem.slice(-5).map((item: any) => (
                         <div key={item.firstName} className="data-card-row">
-                          <img src={UserPicture} alt="" height={"40px"} />
+                          <img src={UserPicture} id="user-img"alt="" height={"40px"} />
                           <div className="data-card-detail">
                             <p id="o-name">
                               {item.firstName} {item.lastName}
@@ -164,6 +165,7 @@ const OtherPage = (props: Props) => {
               </Col>
             </Row>
           </div>
+          <br/>
         </Container>
       </div>
     </>
